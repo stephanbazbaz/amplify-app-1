@@ -17,6 +17,12 @@
       },
       "api": {
         "amplifyapp": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d325x23v5a398x",
+          "type": "cicd"
+        }
       }
     }
   }

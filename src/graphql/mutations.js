@@ -14,19 +14,7 @@ export const createNote = /* GraphQL */ `
     }
   }
 `;
-export const updateNote = /* GraphQL */ `
-  mutation UpdateNote(
-    $input: UpdateNoteInput!
-    $condition: ModelNoteConditionInput
-  ) {
-    updateNote(input: $input, condition: $condition) {
-      id
-     text
-      createdAt
-      updatedAt
-    }
-  }
-`;
+
 export const deleteNote = /* GraphQL */ `
   mutation DeleteNote(
     $input: DeleteNoteInput!

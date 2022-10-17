@@ -7,7 +7,8 @@ import { API } from 'aws-amplify';
 
 function App({ signOut }) {
   const [notes, setNotes] = useState([])
-
+  const [value, setValue] = useState('')
+  console.log(value);
   const fetchNotes = useCallback(async () => {
     const result = await API.graphql({
       query: listNotes,
@@ -16,10 +17,11 @@ function App({ signOut }) {
     setNotes(result.data.listNotes.items)
   }, [setNotes])
 
-  const handleCreateNote = useCallback(async () => {
+  const handleCreateNote = useCallback(async (value) => {
+    console.log(value);
     await API.graphql({
       query: createNote,
-      variables: { input: { text: window.prompt("New note") } },
+      variables: { input: { text: value } },
       authMode: 'AMAZON_COGNITO_USER_POOLS'
     })
     fetchNotes()
@@ -48,7 +50,10 @@ function App({ signOut }) {
         <Text>{note.text}</Text>
         <Button onClick={() => handleDeleteNote(note.id)}>Remove</Button>
       </Flex></div>)}
-      <Button onClick={handleCreateNote}>Add Note</Button>
+      <div className='form-container'>
+        <input value={value} onChange={(e) => setValue(e.target.value)} />
+        <Button onClick={() => handleCreateNote(value)}>Add Note</Button>
+      </div>
     </Flex>
   );
 }
